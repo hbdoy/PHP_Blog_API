@@ -4,18 +4,18 @@
     $tmp_arr = explode('/', $tmp_str);
 	require 'php/methodNotAllowed.php';
 
-    // $tmp_arr[2]起為要的參數
-    if(!empty($tmp_arr[2])){
-		$type = $tmp_arr[2];
+    // $tmp_arr[1]起為要的參數
+    if(!empty($tmp_arr[1])){
+		$type = $tmp_arr[1];
 
 		if($method == "GET"){
 			if($type == "posts"){
-				if(empty($tmp_arr[3])){
+				if(empty($tmp_arr[2])){
                     if(!(include 'php/getAllPosts.php')){
                         echo "請稍後再試";
                     }
-				}else if(!empty($tmp_arr[3]) && is_numeric($tmp_arr[3])){
-					$id = $tmp_arr[3];
+				}else if(!empty($tmp_arr[2]) && is_numeric($tmp_arr[2])){
+					$id = $tmp_arr[2];
                     if(!(include 'php/searchPost.php')){
                         echo "請稍後再試";
                     }
@@ -23,12 +23,12 @@
 					showError();
                 }
 			}else if($type == "authors"){
-				if(empty($tmp_arr[3])){
+				if(empty($tmp_arr[2])){
                     if(!(include 'php/getAllAuthors.php')){
                         echo "請稍後再試";
                     }
-				}else if(!empty($tmp_arr[3])){
-					$id = $tmp_arr[3];
+				}else if(!empty($tmp_arr[2])){
+					$id = $tmp_arr[2];
                     if(!(include 'php/searchAuthor.php')){
                         echo "請稍後再試";
                     }
@@ -60,8 +60,8 @@
 		else if($method == "PATCH"){
 			$data = json_decode(file_get_contents("php://input"), true);
 			if($type == "posts"){
-				if(!empty($tmp_arr[3])){
-					$id = $tmp_arr[3];
+				if(!empty($tmp_arr[2])){
+					$id = $tmp_arr[2];
 					if(!(include 'php/editPost.php')){
                     	echo "請稍後再試";
                 	}
@@ -69,8 +69,8 @@
 					showError();
                 }
 			}else if($type == "authors"){
-				if(!empty($tmp_arr[3])){
-					$id = $tmp_arr[3];
+				if(!empty($tmp_arr[2])){
+					$id = $tmp_arr[2];
 					if(!(include 'php/editAuthor.php')){
                     	echo "請稍後再試";
                 	}
@@ -84,8 +84,8 @@
 
 		else if($method == "DELETE"){
 			if($type == "posts"){
-				if(!empty($tmp_arr[3])){
-					$id = $tmp_arr[3];
+				if(!empty($tmp_arr[2])){
+					$id = $tmp_arr[2];
 					if(!(include 'php/delPost.php')){
                     	echo "請稍後再試";
                 	}
