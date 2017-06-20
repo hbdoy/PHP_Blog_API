@@ -1,4 +1,7 @@
 <IfModule rewrite_module>
+    # 開啟 rewrite 功能
+    RewriteEngine On
+
     # 轉向 test.php
-    RewriteRule ^((?s).*)$ test.php [nc,qsa]
+    RewriteRule ^((?s).*)$ ptml/test.php [nc,qsa]
 </IfModule>
