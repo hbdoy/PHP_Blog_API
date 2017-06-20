@@ -1,19 +1,21 @@
 <?php
     session_start();
     function chkLogin(){
-        require 'readFile.php';
-        $tmp = readFileToArrNoPass("./authors/authors.txt");
-        $i = count($tmp) - 1;
-        $found = 0;
-        while($i >= 0){
-            if($_SESSION['username'] == $tmp[$i]["username"]){
-                $found = 1;
-                break;
+        if(isset($_SESSION['isAdmin'])){
+            require 'readFile.php';
+            $tmp = readFileToArrNoPass("./authors/authors.txt");
+            $i = count($tmp) - 1;
+            $found = 0;
+            while($i >= 0){
+                if($_SESSION['username'] == $tmp[$i]["username"]){
+                    $found = 1;
+                    break;
+                }
+                $i--;
             }
-            $i--;
-        }
-        if($found && isset($_SESSION['isAdmin'])){
-            $res = $tmp[$i];
+            if($found){
+                $res = $tmp[$i];
+            }
         }else{
             $res = array(
                 "message" => "沒有登入"
