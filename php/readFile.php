@@ -1,14 +1,10 @@
 <?php
     function readFileToArr($path){
-        if(!$pf = fopen($path, "r")){
-            return 0;
-            exit;
-        }else{
-            $content = "";
-            while(!feof($pf)) {
-                // 拿掉空白和換行(CRLF)
-                $content .= trim(fgets($pf));
-            }
+        $pf = fopen($path, "r") or die('檔案無法開啟');
+        $content = "";
+        while(!feof($pf)) {
+            // 拿掉空白和換行(CRLF)
+            $content .= trim(fgets($pf));
         }
         fclose($pf);
         $res = json_decode($content, true);

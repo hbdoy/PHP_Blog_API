@@ -5,24 +5,21 @@
             global $id;
             require 'readFile.php';
             $tmp = readFileToArr("./posts/posts.txt");
-            if(!$tmp){
-                echo "檔案無法開啟";
-                exit;
-            }else{
-                for($i = 0; $i < count($tmp); $i++){
-                    if($tmp[$i]['id'] == $id){
-                        unset($tmp[$i]);
-                        require 'writeFile.php';
-                        writeNewData("./posts/posts.txt", json_encode($tmp));
-                        $res = array(
-                            "remain" => count($tmp)
-                        );
-                        break;
-                    }
+            for($i = 0; $i < count($tmp); $i++){
+                if($tmp[$i]['id'] == $id){
+                    unset($tmp[$i]);
+                    // 重整陣列順序
+                    $new = array_values($tmp);
+                    require 'writeFile.php';
+                    writeNewData("./posts/posts.txt", json_encode($new));
                     $res = array(
-                        "message" => "沒有這則文章"
+                        "remain" => count($new)
                     );
+                    break;
                 }
+                $res = array(
+                    "message" => "沒有這則文章"
+                );
             }
         }else{
             $res = array(
@@ -31,6 +28,7 @@
         }
         header("HTTP/1.1 200 OK");
         header("Content-type: application/json; charset=utf-8");
+        header('Access-Control-Allow-Origin:*');
         echo json_encode($res);
     }
     delAPost();

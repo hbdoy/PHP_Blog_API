@@ -5,19 +5,14 @@
             global $id;
             require 'readFile.php';
             $tmp = readFileToArrNoPass("./authors/authors.txt");
-            if(!$tmp){
-                echo "檔案無法開啟";
-                exit;
-            }else{
-                for($i = 0; $i < count($tmp); $i++){
-                    if($tmp[$i]['username'] == $id){
-                        $res = $tmp[$i];
-                        break;
-                    }
-                    $res = array(
-                        "message" => "沒有這個使用者"
-                    );
+            for($i = 0; $i < count($tmp); $i++){
+                if($tmp[$i]['username'] == $id){
+                    $res = $tmp[$i];
+                    break;
                 }
+                $res = array(
+                    "message" => "沒有這個使用者"
+                );
             }
         }else{
             $res = array(
@@ -26,6 +21,7 @@
         }
         header("HTTP/1.1 200 OK");
         header("Content-type: application/json; charset=utf-8");
+        header('Access-Control-Allow-Origin:*');
         echo json_encode($res);
     }
     searchAnAuthor();

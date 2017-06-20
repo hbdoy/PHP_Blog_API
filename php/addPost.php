@@ -7,10 +7,8 @@
             $posts_arr = readFileToArr("./posts/posts.txt");
             $authors_arr = readFileToArrNoPass("./authors/authors.txt");
             $author_index = searchAuthorIndexByUsername("./authors/authors.txt", $_SESSION['username']);
-            if(!($posts_arr && $authors_arr && ($author_index + 1))){
-                echo "檔案無法開啟";
-                exit;
-            }else{
+            // 任一為空就不接受
+            if(!(empty($data['title']) || empty($data['content']) || gettype($data['tags']) != 'array')){
                 $tmp = array(
                     "id" => time(),
                     "title" => htmlspecialchars($data['title']),
@@ -22,8 +20,12 @@
                 );
                 require 'writeFile.php';
                 $posts_arr[] = $tmp;
-                $res = $tmp;
                 writeNewData("./posts/posts.txt", json_encode($posts_arr));
+                $res = $tmp;
+            }else{
+                $res = array(
+                    "message" => "文章標題、內容、tags格式請填妥"
+                );
             }
         }else{
             $res = array(
@@ -32,6 +34,7 @@
         }
         header("HTTP/1.1 201 Accepted");
         header("Content-Type: application/json; charset=utf-8");
+        header('Access-Control-Allow-Origin:*');
         echo json_encode($res);
     }
     addAPost();

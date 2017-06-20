@@ -1,6 +1,6 @@
 <?php
-    require 'readFile.php';
     function login(){
+        require 'readFile.php';
         // 要注意全域變數問題
         global $data;
         $tmp = readFileToArr("./authors/authors.txt");
@@ -31,6 +31,7 @@
         $res = json_encode($msg);
         header("HTTP/1.1 200 OK");
         header("Content-type: application/json; charset=utf-8");
+        header('Access-Control-Allow-Origin:*');
         echo $res;
     }
     login();
