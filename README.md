@@ -7,6 +7,9 @@ https://hackmd.io/s/H1ct7kemW
 ``127.0.0.1/login``
 
 ``127.0.0.1/posts``
+
+``http://hbdoy.esy.es/``
+
 ### But
 1. 注意``.htaccess``放的位置。
 2. 如果要修改 rewrite 引導規則，須注意切割 URI 出來的陣列索引要調整。
