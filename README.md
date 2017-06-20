@@ -15,7 +15,7 @@ https://hackmd.io/s/H1ct7kemW
 ```
 <IfModule rewrite_module>
     # 轉向 test.php
-    RewriteRule ^((?s).*)$ ptml/test.php [nc,qsa]
+    RewriteRule ^((?s).*)$ PHP_Blog_API/test.php [nc,qsa]
 </IfModule>
 ```
 
