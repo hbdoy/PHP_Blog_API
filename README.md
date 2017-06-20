@@ -3,8 +3,9 @@
 https://hackmd.io/s/H1ct7kemW
 
 ## 使用須知
-### example
+### Example
 ``127.0.0.1/login``
+
 ``127.0.0.1/posts``
 ### But
 1. 注意``.htaccess``放的位置。
