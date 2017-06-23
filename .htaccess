@@ -3,5 +3,7 @@
     RewriteEngine On
 
     # 轉向 test.php
+    # 要從哪裡轉向此文件就要放到那
+    # Ex: 根目錄->PHP_Blog_API/index.php，那此文件就要放到根目錄
     RewriteRule ^((?s).*)$ PHP_Blog_API/index.php [nc,qsa]
 </IfModule>
