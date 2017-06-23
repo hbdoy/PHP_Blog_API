@@ -3,5 +3,5 @@
     RewriteEngine On
 
     # 轉向 test.php
-    RewriteRule ^((?s).*)$ PHP_Blog_API/test.php [nc,qsa]
+    RewriteRule ^((?s).*)$ PHP_Blog_API/index.php [nc,qsa]
 </IfModule>

@@ -3,7 +3,7 @@
     function editAnAuthor(){
         if(isset($_SESSION['isAdmin'])){
             global $id, $data;
-            require 'readFile.php';
+            require_once 'readFile.php';
             $tmp = readFileToArr("./authors/authors.txt");
             for($i = 0; $i < count($tmp); $i++){
                 if($tmp[$i]['username'] == $id){
@@ -26,7 +26,7 @@
                         }
                     }
                     // 寫入檔案保存
-                    require 'writeFile.php';
+                    require_once 'writeFile.php';
                     writeNewData("./authors/authors.txt", json_encode($tmp));
                     // 不顯示密碼
                     unset($tmp[$i]['password']);
@@ -37,14 +37,15 @@
                     "message" => "沒有這個使用者"
                 );
             }
+            if(isset($res['message'])){
+                http_response_code(404);
+            }
         }else{
             $res = array(
                 "message" => "請先登入"
             );
+            http_response_code(401);
         }
-        header("HTTP/1.1 200 OK");
-        header("Content-type: application/json; charset=utf-8");
-        header('Access-Control-Allow-Origin:*');
         echo json_encode($res);
     }
     editAnAuthor();

@@ -1,7 +1,7 @@
 <?php
     function searchAPost(){
         global $id;
-        require 'readFile.php';
+        require_once 'readFile.php';
         $tmp = readFileToArr("./posts/posts.txt");
         for($i = 0; $i < count($tmp); $i++){
             if($tmp[$i]['id'] == $id){
@@ -12,9 +12,9 @@
                 "message" => "沒有這則文章"
             );
         }
-        header("HTTP/1.1 200 OK");
-        header("Content-type: application/json; charset=utf-8");
-        header('Access-Control-Allow-Origin:*');
+        if(isset($res['message'])){
+            http_response_code(404);
+        }
         echo json_encode($res);
     }
     searchAPost();

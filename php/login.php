@@ -1,6 +1,6 @@
 <?php
     function login(){
-        require 'readFile.php';
+        require_once 'readFile.php';
         // 要注意全域變數問題
         global $data;
         $tmp = readFileToArr("./authors/authors.txt");
@@ -27,11 +27,9 @@
             $msg = array(
                 "message" => "帳號或密碼錯誤"
             );
+            http_response_code(401);
         }
         $res = json_encode($msg);
-        header("HTTP/1.1 200 OK");
-        header("Content-type: application/json; charset=utf-8");
-        header('Access-Control-Allow-Origin:*');
         echo $res;
     }
     login();

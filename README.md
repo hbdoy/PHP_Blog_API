@@ -18,11 +18,11 @@ https://hackmd.io/s/H1ct7kemW
 ```
 <IfModule rewrite_module>
     # 轉向 test.php
-    RewriteRule ^((?s).*)$ PHP_Blog_API/test.php [nc,qsa]
+    RewriteRule ^((?s).*)$ PHP_Blog_API/index.php [nc,qsa]
 </IfModule>
 ```
 
 ## 尚未完善
 - [x] error 訊息
-- [ ] http status code
+- [x] http status code
 - [x] 跨域問題
